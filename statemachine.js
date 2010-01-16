@@ -4,10 +4,10 @@ var StateMachine = function () {
       currentState; 
 
   that.addState = function(name, transitions, action) {
-    if (states[name] == undefined) {
+    if (!states[name]) {
       states[name] = new StateMachine.State(transitions, action);
     };
-    if (currentState == undefined) {
+    if (!currentState) {
       currentState = states[name];
     };
   };
@@ -23,7 +23,7 @@ var StateMachine = function () {
       throw 'no such next state ' + next.name + ' exists'
     };
 
-    if (next.condition == undefined || next.condition(currentState)) {
+    if (!next.condition || next.condition(currentState)) {
       currentState = states[next.name];
     };
   };
